@@ -3,6 +3,7 @@ import math
 import json
 import time
 import shutil
+import random
 import heroku3
 import requests
 
@@ -20,6 +21,21 @@ from plugins.helpers import humanbytes
 from database.filters_mdb import filter_stats
 from database.users_mdb import add_user, find_user, all_users
 
+PHOTO = [
+    "https://telegra.ph/file/70a33a4c734a6c3943add.jpg",
+    "https://telegra.ph/file/410170a9257a4e299a73f.jpg",
+    "https://telegra.ph/file/abe7d0a6007ae9f178a1a.jpg",
+    "https://telegra.ph/file/8ed87ff3c81d4445045b4.jpg",
+    "https://telegra.ph/file/c6490aad218a184ed1ed2.jpg",
+    "https://telegra.ph/file/ab3cce0160d9c56d0aea5.jpg",
+    "https://telegra.ph/file/7bce9e328da63714fe43c.jpg",
+    "https://telegra.ph/file/50a3b5f3bae25a126c6cd.jpg",
+    "https://telegra.ph/file/18e8c1a886041ac87ac0e.jpg",
+    "https://telegra.ph/file/4ea554e7d6254789c43b5.jpg",
+    "https://telegra.ph/file/4b3c332aee5e3fc743b90.jpg",
+    "https://telegra.ph/file/8f5f829c19c1246d7e0d5.jpg",
+    "https://telegra.ph/file/4ca06088d7c2e483c394d.jpg"
+]
 
 @trojanz.on_message(filters.command('id') & (filters.private | filters.group))
 async def showid(client, message):
@@ -211,7 +227,8 @@ async def bot_status(client,message):
 
 @trojanz.on_message(filters.command('start') & filters.private)
 async def start(client, message):
-    await message.reply_text(
+    await message.reply_photo(
+        photo=f"{random.choice(PHOTO)}",
         text=Script.START_MSG.format(message.from_user.mention),
         disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup(
